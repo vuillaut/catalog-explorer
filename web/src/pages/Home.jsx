@@ -16,8 +16,8 @@ const Home = () => {
     const [filters, setFilters] = useState({
         categories: [],
         usage: [],
-        licenses: [],
-        free: []
+        licenses: '',
+        free: false
     });
 
     const handleFilterChange = (key, value) => {
@@ -28,8 +28,8 @@ const Home = () => {
         setFilters({
             categories: [],
             usage: [],
-            licenses: [],
-            free: []
+            licenses: '',
+            free: false
         });
         setSelectedDim('');
         setSearch('');
@@ -66,18 +66,13 @@ const Home = () => {
             }
 
             // License
-            if (filters.licenses.length > 0) {
-                if (!filters.licenses.includes(tool.license)) return false;
+            if (filters.licenses) {
+                if (tool.license !== filters.licenses) return false;
             }
 
             // Free
-            if (filters.free.length > 0) {
-                const isFree = tool.isAccessibleForFree === true;
-                const wantsFree = filters.free.includes('Yes');
-                const wantsPaid = filters.free.includes('No');
-
-                if (wantsFree && !wantsPaid && !isFree) return false;
-                if (!wantsFree && wantsPaid && isFree) return false;
+            if (filters.free) {
+                if (tool.isAccessibleForFree !== true) return false;
             }
 
             return true;
@@ -91,7 +86,7 @@ const Home = () => {
                     Research Software Tools
                 </h1>
                 <p className="text-slate-400 max-w-2xl mx-auto">
-                    Explore a curated catalog of tools designed to improve the quality and sustainability of research software.
+                    A curated catalog of tools designed to improve the quality and sustainability of research software.
                 </p>
             </div>
 

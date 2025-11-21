@@ -47,7 +47,7 @@ const FilterSidebar = ({ options, filters, onFilterChange, onClear }) => {
             <div className="glass-panel p-4 sticky top-24">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="font-bold text-white">Filters</h2>
-                    {(filters.categories.length > 0 || filters.usage.length > 0 || filters.licenses.length > 0 || filters.free.length > 0) && (
+                    {(filters.categories.length > 0 || filters.usage.length > 0 || filters.licenses !== '' || filters.free) && (
                         <button
                             onClick={onClear}
                             className="text-xs text-sky-400 hover:text-sky-300 flex items-center"
@@ -57,13 +57,57 @@ const FilterSidebar = ({ options, filters, onFilterChange, onClear }) => {
                     )}
                 </div>
 
-                <FilterSection
-                    title="Category"
-                    options={options.categories}
-                    selected={filters.categories}
-                    onChange={(newVal) => onFilterChange('categories', newVal)}
-                    renderOption={(opt) => opt.charAt(0).toUpperCase() + opt.slice(1)}
-                />
+                <div className="mb-6 border-b border-slate-700/50 pb-6">
+                    <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-semibold text-slate-200">Software Tier</h3>
+                        <a
+                            href="https://everse.software/RSQKit/three_tier_view"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-sky-400 hover:text-sky-300 underline"
+                        >
+                            What is this?
+                        </a>
+                    </div>
+                    <div className="flex flex-col items-center gap-2 relative py-2">
+                        {/* Pyramid Background */}
+                        <div className="absolute inset-0 flex flex-col items-center justify-center opacity-10 pointer-events-none">
+                            <div className="w-16 h-0 border-l-[32px] border-l-transparent border-r-[32px] border-r-transparent border-b-[48px] border-b-sky-500 mb-1"></div>
+                            <div className="w-32 h-0 border-l-[16px] border-l-transparent border-r-[16px] border-r-transparent border-b-[48px] border-b-sky-500 mb-1"></div>
+                            <div className="w-48 h-12 bg-sky-500"></div>
+                        </div>
+
+                        {['ResearchInfrastructureSoftware', 'PrototypeTool', 'AnalysisCode'].map((cat, index) => {
+                            const isActive = filters.categories.includes(cat);
+                            const widthClass = index === 0 ? 'w-32' : index === 1 ? 'w-40' : 'w-48';
+
+                            return (
+                                <button
+                                    key={cat}
+                                    onClick={() => {
+                                        // Toggle logic: if active, remove; if not, add.
+                                        // But user asked for a "slider", implying selection. 
+                                        // Let's make it toggleable blocks for now as it fits the "pyramid" request better than a linear slider.
+                                        const newCats = isActive
+                                            ? filters.categories.filter(c => c !== cat)
+                                            : [...filters.categories, cat];
+                                        onFilterChange('categories', newCats);
+                                    }}
+                                    className={`
+                    ${widthClass} py-2 px-1 text-xs font-medium rounded-md transition-all duration-300
+                    border border-slate-600 shadow-sm z-10
+                    ${isActive
+                                            ? 'bg-sky-600 text-white border-sky-400 shadow-sky-900/50'
+                                            : 'bg-slate-800/80 text-slate-400 hover:bg-slate-700 hover:text-slate-200'
+                                        }
+                  `}
+                                >
+                                    {cat.replace(/([A-Z])/g, ' $1').trim()}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
 
                 <FilterSection
                     title="How to Use"
@@ -72,20 +116,33 @@ const FilterSidebar = ({ options, filters, onFilterChange, onClear }) => {
                     onChange={(newVal) => onFilterChange('usage', newVal)}
                 />
 
-                <FilterSection
-                    title="Free Access"
-                    options={['Yes', 'No']}
-                    selected={filters.free}
-                    onChange={(newVal) => onFilterChange('free', newVal)}
-                />
+                <div className="mb-6 border-b border-slate-700/50 pb-6">
+                    <label className="flex items-center cursor-pointer group">
+                        <input
+                            type="checkbox"
+                            className="rounded border-slate-600 bg-slate-800 text-sky-500 focus:ring-sky-500 focus:ring-offset-slate-900"
+                            checked={filters.free}
+                            onChange={(e) => onFilterChange('free', e.target.checked)}
+                        />
+                        <span className="ml-2 text-slate-200 group-hover:text-white font-semibold text-sm">Only Free Access</span>
+                    </label>
+                </div>
 
-                <FilterSection
-                    title="License"
-                    options={options.licenses}
-                    selected={filters.licenses}
-                    onChange={(newVal) => onFilterChange('licenses', newVal)}
-                    renderOption={(opt) => opt.split('/').pop()}
-                />
+                <div className="mb-6 last:border-0">
+                    <h3 className="font-semibold text-slate-200 mb-3 text-sm">License</h3>
+                    <select
+                        className="w-full bg-slate-800 border border-slate-600 rounded-lg p-2 text-sm text-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                        value={filters.licenses}
+                        onChange={(e) => onFilterChange('licenses', e.target.value)}
+                    >
+                        <option value="">All Licenses</option>
+                        {options.licenses.map(license => (
+                            <option key={license} value={license}>
+                                {license.split('/').pop()}
+                            </option>
+                        ))}
+                    </select>
+                </div>
             </div>
         </div>
     );
