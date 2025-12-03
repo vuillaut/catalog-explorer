@@ -82,17 +82,17 @@ const Home = () => {
     return (
         <div>
             <div className="mb-8 text-center">
-                <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-indigo-400">
-                    Research Software Tools
+                <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-indigo-600">
+                    Research Software Tools & Services
                 </h1>
-                <p className="text-slate-400 max-w-2xl mx-auto">
-                    A curated catalog of tools designed to improve the quality and sustainability of research software.
+                <p className="text-slate-500 max-w-2xl mx-auto">
+                    A curated catalog of tools and services designed to assess or improve the quality and sustainability of research software.
                 </p>
             </div>
 
             <div className="glass-panel p-4 mb-8 flex flex-col md:flex-row gap-4 items-center">
                 <button
-                    className="md:hidden p-2 text-slate-400 hover:text-white"
+                    className="md:hidden p-2 text-slate-500 hover:text-slate-900"
                     onClick={() => setShowMobileFilters(!showMobileFilters)}
                 >
                     <Menu size={24} />
@@ -103,7 +103,7 @@ const Home = () => {
                     <input
                         type="text"
                         placeholder="Search tools..."
-                        className="w-full bg-slate-800/50 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
+                        className="w-full bg-white border border-slate-200 rounded-lg pl-10 pr-4 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
@@ -112,7 +112,7 @@ const Home = () => {
                 <div className="relative min-w-[200px] w-full md:w-auto hidden md:block">
                     <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                     <select
-                        className="w-full bg-slate-800/50 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-sky-500 appearance-none cursor-pointer transition-all"
+                        className="w-full bg-white border border-slate-200 rounded-lg pl-10 pr-4 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500 appearance-none cursor-pointer transition-all"
                         value={selectedDim}
                         onChange={(e) => setSelectedDim(e.target.value)}
                     >
@@ -126,10 +126,10 @@ const Home = () => {
 
             <div className="flex flex-col md:flex-row gap-8 items-start">
                 {/* Mobile Sidebar Overlay */}
-                <div className={`md:hidden fixed inset-0 z-40 bg-slate-900/90 transition-opacity ${showMobileFilters ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                <div className={`md:hidden fixed inset-0 z-40 bg-white/95 transition-opacity ${showMobileFilters ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                     <div className="p-4 h-full overflow-y-auto">
                         <div className="flex justify-end mb-4">
-                            <button onClick={() => setShowMobileFilters(false)} className="text-white">
+                            <button onClick={() => setShowMobileFilters(false)} className="text-slate-900">
                                 <X size={24} />
                             </button>
                         </div>
@@ -158,17 +158,17 @@ const Home = () => {
                             <Link
                                 key={tool._filename}
                                 to={`/tool/${tool._filename}`}
-                                className="glass-panel p-6 hover:bg-slate-800/50 transition-all duration-300 hover:-translate-y-1 group flex flex-col"
+                                className="glass-panel p-6 hover:bg-slate-50 transition-all duration-300 hover:-translate-y-1 group flex flex-col"
                             >
                                 <div className="flex justify-between items-start mb-4">
-                                    <h3 className="text-xl font-semibold text-sky-300 group-hover:text-sky-200 line-clamp-1" title={tool.name}>{tool.name}</h3>
+                                    <h3 className="text-xl font-semibold text-sky-600 group-hover:text-sky-700">{tool.name}</h3>
                                     {tool.isAccessibleForFree && (
-                                        <span className="flex-shrink-0 ml-2 px-2 py-1 text-xs rounded-full bg-green-500/20 text-green-400 border border-green-500/30">
+                                        <span className="flex-shrink-0 ml-2 px-2 py-1 text-xs rounded-full bg-green-100 text-green-700 border border-green-200">
                                             Free
                                         </span>
                                     )}
                                 </div>
-                                <p className="text-slate-400 text-sm line-clamp-3 mb-4 flex-1">
+                                <p className="text-slate-500 text-sm line-clamp-3 mb-4 flex-1">
                                     {tool.description}
                                 </p>
                                 <div className="flex flex-wrap gap-2 mt-auto">
@@ -176,7 +176,7 @@ const Home = () => {
                                         (Array.isArray(tool.hasQualityDimension) ? tool.hasQualityDimension : [tool.hasQualityDimension])
                                             .slice(0, 3)
                                             .map((dim, i) => (
-                                                <span key={i} className="text-xs px-2 py-1 rounded-md bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+                                                <span key={i} className="text-xs px-2 py-1 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200">
                                                     {dim['@id'].replace('dim:', '')}
                                                 </span>
                                             ))
@@ -191,7 +191,7 @@ const Home = () => {
                             <p className="text-lg mb-2">No tools found matching your criteria.</p>
                             <button
                                 onClick={clearFilters}
-                                className="text-sky-400 hover:text-sky-300 underline"
+                                className="text-sky-600 hover:text-sky-700 underline"
                             >
                                 Clear all filters
                             </button>

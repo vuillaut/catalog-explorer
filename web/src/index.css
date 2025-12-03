@@ -2,14 +2,14 @@
 
 
 :root {
-  --bg-color: #0f172a;
-  --text-color: #e2e8f0;
-  --primary-color: #38bdf8;
-  --secondary-color: #818cf8;
-  --glass-bg: rgba(30, 41, 59, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  --card-hover-bg: rgba(51, 65, 85, 0.8);
+  --bg-color: #ffffff;
+  --text-color: #334155;
+  --primary-color: #0284c7;
+  --secondary-color: #4f46e5;
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(226, 232, 240, 0.8);
+  --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --card-hover-bg: #f8fafc;
 }
 
 body {
@@ -18,10 +18,10 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   background-image:
-    radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(129, 140, 248, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(129, 140, 248, 0.15) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(129, 140, 248, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.05) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(129, 140, 248, 0.05) 0px, transparent 50%);
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -61,7 +61,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #fff;
+  color: #0f172a;
   margin-top: 0;
 }
 
@@ -71,14 +71,14 @@ h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(56, 189, 248, 0.3);
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(56, 189, 248, 0.5);
+  background: #94a3b8;
 }

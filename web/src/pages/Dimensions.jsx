@@ -19,8 +19,8 @@ const Dimensions = () => {
     return (
         <div>
             <div className="mb-8">
-                <h1 className="text-3xl font-bold mb-4 text-white">Quality Dimensions</h1>
-                <p className="text-slate-400">
+                <h1 className="text-3xl font-bold mb-4 text-slate-900">Quality Dimensions</h1>
+                <p className="text-slate-500">
                     Browse tools categorized by software quality dimensions.
                 </p>
             </div>
@@ -31,9 +31,9 @@ const Dimensions = () => {
                     return (
                         <div key={dim} className="glass-panel p-6">
                             <div className="flex items-center mb-4">
-                                <Tag className="text-sky-400 mr-2" size={24} />
-                                <h2 className="text-xl font-bold text-white capitalize">{dim}</h2>
-                                <span className="ml-auto bg-slate-700 text-slate-300 text-xs px-2 py-1 rounded-full">
+                                <Tag className="text-sky-600 mr-2" size={24} />
+                                <h2 className="text-xl font-bold text-slate-900 capitalize">{dim}</h2>
+                                <span className="ml-auto bg-slate-200 text-slate-600 text-xs px-2 py-1 rounded-full">
                                     {dimTools.length} tools
                                 </span>
                             </div>
@@ -43,14 +43,14 @@ const Dimensions = () => {
                                     <li key={tool._filename}>
                                         <Link
                                             to={`/tool/${tool._filename}`}
-                                            className="text-slate-300 hover:text-sky-300 transition-colors block truncate"
+                                            className="text-slate-600 hover:text-sky-600 transition-colors block truncate"
                                         >
                                             {tool.name}
                                         </Link>
                                     </li>
                                 ))}
                                 {dimTools.length > 5 && (
-                                    <li className="text-slate-500 text-sm italic pt-1">
+                                    <li className="text-slate-400 text-sm italic pt-1">
                                         + {dimTools.length - 5} more...
                                     </li>
                                 )}

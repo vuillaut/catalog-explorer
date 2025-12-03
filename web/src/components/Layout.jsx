@@ -7,21 +7,21 @@ const Layout = () => {
         <div className="min-h-screen flex flex-col">
             <header className="glass-panel sticky top-4 z-50 mx-4 mt-4 mb-8 px-6 py-4 flex items-center justify-between max-w-7xl xl:mx-auto w-full">
                 <Link to="/" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-indigo-400 hover:opacity-80 transition-opacity">
-                    Catalog Explorer
+                    EVERSE TechRadar
                 </Link>
 
                 <nav className="flex items-center gap-6">
-                    <Link to="/" className="text-slate-300 hover:text-white transition-colors">
+                    <Link to="/" className="text-slate-600 hover:text-slate-900 transition-colors">
                         Tools
                     </Link>
-                    <Link to="/dimensions" className="text-slate-300 hover:text-white transition-colors">
+                    <Link to="/dimensions" className="text-slate-600 hover:text-slate-900 transition-colors">
                         Dimensions
                     </Link>
                     <a
                         href="https://github.com/everse/catalog-explorer"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-full hover:bg-white/10 transition-colors"
+                        className="p-2 rounded-full hover:bg-black/5 transition-colors"
                     >
                         <Github size={20} />
                     </a>

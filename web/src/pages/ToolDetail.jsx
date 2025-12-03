@@ -33,17 +33,17 @@ const ToolDetail = () => {
 
     return (
         <div className="max-w-4xl mx-auto">
-            <Link to="/" className="inline-flex items-center text-slate-400 hover:text-sky-400 mb-6 transition-colors">
+            <Link to="/" className="inline-flex items-center text-slate-500 hover:text-sky-600 mb-6 transition-colors">
                 <ArrowLeft size={16} className="mr-2" /> Back to Catalog
             </Link>
 
             <div className="glass-panel p-8 mb-8">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-6">
                     <div>
-                        <h1 className="text-3xl font-bold text-white mb-2">{tool.name}</h1>
+                        <h1 className="text-3xl font-bold text-slate-900 mb-2">{tool.name}</h1>
                         <div className="flex flex-wrap gap-2">
                             {dimensions.map((dim, i) => (
-                                <span key={i} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                                <span key={i} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">
                                     <Tag size={12} className="mr-1" />
                                     {dim['@id'].replace('dim:', '')}
                                 </span>
@@ -56,24 +56,24 @@ const ToolDetail = () => {
                             href={tool.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg transition-colors font-medium shadow-lg shadow-sky-900/20"
+                            className="inline-flex items-center px-4 py-2 bg-white border border-slate-300 hover:border-slate-400 text-slate-700 hover:text-slate-900 rounded-lg transition-colors font-medium"
                         >
                             Visit Website <ExternalLink size={16} className="ml-2" />
                         </a>
                     )}
                 </div>
 
-                <div className="prose prose-invert max-w-none mb-8">
-                    <p className="text-slate-300 text-lg leading-relaxed">{tool.description}</p>
+                <div className="prose prose-slate max-w-none mb-8">
+                    <p className="text-slate-600 text-lg leading-relaxed">{tool.description}</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-slate-700/50 pt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-slate-200 pt-6">
                     <div>
-                        <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Details</h3>
+                        <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">Details</h3>
                         <ul className="space-y-3">
                             {tool.license && (
-                                <li className="flex items-start text-slate-300">
-                                    <Info size={18} className="mr-2 text-sky-400 mt-0.5" />
+                                <li className="flex items-start text-slate-600">
+                                    <Info size={18} className="mr-2 text-sky-600 mt-0.5" />
                                     <span>
                                         <span className="text-slate-500 block text-xs">License</span>
                                         {tool.license.split('/').pop()}
@@ -81,8 +81,8 @@ const ToolDetail = () => {
                                 </li>
                             )}
                             {tool.howToUse && (
-                                <li className="flex items-start text-slate-300">
-                                    <CheckCircle size={18} className="mr-2 text-sky-400 mt-0.5" />
+                                <li className="flex items-start text-slate-600">
+                                    <CheckCircle size={18} className="mr-2 text-sky-600 mt-0.5" />
                                     <span>
                                         <span className="text-slate-500 block text-xs">Usage</span>
                                         {Array.isArray(tool.howToUse) ? tool.howToUse.join(', ') : tool.howToUse}
@@ -96,16 +96,16 @@ const ToolDetail = () => {
 
             {relatedTools.length > 0 && (
                 <div>
-                    <h2 className="text-2xl font-bold text-white mb-4">Related Tools</h2>
+                    <h2 className="text-2xl font-bold text-slate-900 mb-4">Related Tools</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {relatedTools.map(t => (
                             <Link
                                 key={t._filename}
                                 to={`/tool/${t._filename}`}
-                                className="glass-panel p-4 hover:bg-slate-800/50 transition-all hover:-translate-y-1"
+                                className="glass-panel p-4 hover:bg-slate-50 transition-all hover:-translate-y-1"
                             >
-                                <h3 className="font-semibold text-sky-300 mb-2">{t.name}</h3>
-                                <p className="text-slate-400 text-sm line-clamp-2">{t.description}</p>
+                                <h3 className="font-semibold text-sky-600 mb-2">{t.name}</h3>
+                                <p className="text-slate-500 text-sm line-clamp-2">{t.description}</p>
                             </Link>
                         ))}
                     </div>
