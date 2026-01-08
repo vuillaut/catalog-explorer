@@ -3,6 +3,7 @@ import { getAllTools, getQualityDimensions, getFilterOptions } from '../data/loa
 import { Link } from 'react-router-dom';
 import { Search, Filter, Menu, X } from 'lucide-react';
 import FilterSidebar from '../components/FilterSidebar';
+import Radar from '../components/Radar';
 
 const Home = () => {
     const tools = getAllTools();
@@ -17,6 +18,7 @@ const Home = () => {
         categories: [],
         usage: [],
         licenses: '',
+        languages: [],
         free: false
     });
 
@@ -29,6 +31,7 @@ const Home = () => {
             categories: [],
             usage: [],
             licenses: '',
+            languages: [],
             free: false
         });
         setSelectedDim('');
@@ -65,6 +68,15 @@ const Home = () => {
                 if (!hasUsage) return false;
             }
 
+            // Languages
+            if (filters.languages.length > 0) {
+                const toolLangs = tool.appliesToProgrammingLanguage
+                    ? (Array.isArray(tool.appliesToProgrammingLanguage) ? tool.appliesToProgrammingLanguage : [tool.appliesToProgrammingLanguage])
+                    : [];
+                const hasLang = toolLangs.some(l => filters.languages.includes(l));
+                if (!hasLang) return false;
+            }
+
             // License
             if (filters.licenses) {
                 if (tool.license !== filters.licenses) return false;
@@ -81,14 +93,47 @@ const Home = () => {
 
     return (
         <div>
-            <div className="mb-8 text-center">
-                <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-indigo-600">
-                    Research Software Tools & Services
-                </h1>
-                <p className="text-slate-500 max-w-2xl mx-auto">
-                    A curated catalog of tools and services designed to assess or improve the quality and sustainability of research software.
-                </p>
+            {/* Hero Section with Split Layout */}
+            <div className="flex flex-col lg:flex-row gap-8 items-center mb-12 min-h-[60vh]">
+                {/* Left: Title & Intro (1/3 width) */}
+                <div className="w-full lg:w-4/12 flex-shrink-0 text-center lg:text-left space-y-6">
+                    <h1 className="text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-indigo-600 leading-tight">
+                        Research Software <br />
+                        <span className="text-slate-800">Quality Tools</span>
+                    </h1>
+                    <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        A curated catalog of tools and services to measure and improve research software quality.
+                    </p>
+                    <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-4">
+                        <button
+                            onClick={() => document.getElementById('browse-tools').scrollIntoView({ behavior: 'smooth' })}
+                            className="px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors shadow-lg shadow-sky-200"
+                        >
+                            Browse Catalog
+                        </button>
+                        <Link
+                            to="/dimensions"
+                            className="px-6 py-3 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-medium rounded-lg transition-colors"
+                        >
+                            View Dimensions
+                        </Link>
+                    </div>
+                </div>
+
+                {/* Right: Radar Visualization (2/3 width) */}
+                <div className="flex-1 w-full lg:w-8/12 flex justify-center lg:justify-end overflow-visible">
+                    <div className="lg:-mr-24">
+                        <Radar
+                            tools={tools}
+                            dimensions={dimensions}
+                            size={800}
+                        />
+                    </div>
+                </div>
             </div>
+
+            {/* Anchored Section for Search & Filters */}
+            <div id="browse-tools" className="scroll-mt-24"></div>
 
             <div className="glass-panel p-4 mb-8 flex flex-col md:flex-row gap-4 items-center">
                 <button

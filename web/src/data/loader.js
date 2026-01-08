@@ -42,17 +42,30 @@ export const getQualityDimensions = () => {
     return Array.from(dimensions).sort();
 };
 
+export const getProgrammingLanguages = () => {
+    const tools = getAllTools();
+    const languages = new Set();
+    tools.forEach(tool => {
+        if (tool.appliesToProgrammingLanguage) {
+            const langs = Array.isArray(tool.appliesToProgrammingLanguage)
+                ? tool.appliesToProgrammingLanguage
+                : [tool.appliesToProgrammingLanguage];
+            langs.forEach(l => languages.add(l));
+        }
+    });
+    return Array.from(languages).sort();
+};
+
 export const getFilterOptions = () => {
     const tools = getAllTools();
     const options = {
         categories: new Set(),
         usage: new Set(),
-        licenses: new Set(),
-        free: new Set([true, false])
+        licenses: new Set()
     };
 
     tools.forEach(tool => {
-        // Category
+        // Categories
         if (tool.applicationCategory) {
             const cats = Array.isArray(tool.applicationCategory)
                 ? tool.applicationCategory
@@ -78,6 +91,7 @@ export const getFilterOptions = () => {
         categories: Array.from(options.categories).sort(),
         usage: Array.from(options.usage).sort(),
         licenses: Array.from(options.licenses).sort(),
+        languages: getProgrammingLanguages(),
         free: [true, false]
     };
 };

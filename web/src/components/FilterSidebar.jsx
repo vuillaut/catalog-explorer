@@ -47,7 +47,7 @@ const FilterSidebar = ({ options, filters, onFilterChange, onClear }) => {
             <div className="glass-panel p-4 sticky top-24">
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="font-bold text-slate-900">Filters</h2>
-                    {(filters.categories.length > 0 || filters.usage.length > 0 || filters.licenses !== '' || filters.free) && (
+                    {(filters.categories.length > 0 || filters.usage.length > 0 || filters.languages.length > 0 || filters.licenses !== '' || filters.free) && (
                         <button
                             onClick={onClear}
                             className="text-xs text-sky-600 hover:text-sky-700 flex items-center"
@@ -119,6 +119,13 @@ const FilterSidebar = ({ options, filters, onFilterChange, onClear }) => {
                     onChange={(newVal) => onFilterChange('usage', newVal)}
                 />
 
+                <FilterSection
+                    title="Programming Language"
+                    options={options.languages || []}
+                    selected={filters.languages || []}
+                    onChange={(newVal) => onFilterChange('languages', newVal)}
+                />
+
                 <div className="mb-6 border-b border-slate-200 pb-6">
                     <label className="flex items-center cursor-pointer group">
                         <input
@@ -127,7 +134,7 @@ const FilterSidebar = ({ options, filters, onFilterChange, onClear }) => {
                             checked={filters.free}
                             onChange={(e) => onFilterChange('free', e.target.checked)}
                         />
-                        <span className="ml-2 text-slate-700 group-hover:text-slate-900 font-semibold text-sm">Only Free Access</span>
+                        <span className="ml-2 text-slate-700 group-hover:text-slate-900 font-semibold text-sm">Free to use</span>
                     </label>
                 </div>
 
