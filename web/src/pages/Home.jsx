@@ -94,7 +94,7 @@ const Home = () => {
     return (
         <div>
             {/* Hero Section with Split Layout */}
-            <div className="flex flex-col lg:flex-row gap-8 items-center mb-12 min-h-[60vh]">
+            <div className="flex flex-col lg:flex-row gap-8 items-center mb-12 min-h-[60vh] lg:-mt-10">
                 {/* Left: Title & Intro (1/3 width) */}
                 <div className="w-full lg:w-4/12 flex-shrink-0 text-center lg:text-left space-y-6">
                     <h1 className="text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-indigo-600 leading-tight">

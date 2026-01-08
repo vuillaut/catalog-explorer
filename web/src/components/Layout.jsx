@@ -5,7 +5,7 @@ import { Search, Github } from 'lucide-react';
 const Layout = () => {
     return (
         <div className="min-h-screen flex flex-col">
-            <header className="glass-panel sticky top-4 z-50 mx-4 mt-4 mb-8 px-6 py-4 flex items-center justify-between max-w-7xl xl:mx-auto w-full">
+            <header className="glass-panel sticky top-4 z-50 mx-4 mt-4 mb-0 px-6 py-4 flex items-center justify-between max-w-7xl xl:mx-auto w-full">
                 <Link to="/" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-indigo-400 hover:opacity-80 transition-opacity">
                     EVERSE TechRadar
                 </Link>

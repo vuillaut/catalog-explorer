@@ -135,7 +135,7 @@ const Radar = ({ tools, dimensions, size = 500 }) => {
     }, [tools, dimensions, radius, center, sectorData]);
 
     return (
-        <div className="relative flex justify-center items-center py-8">
+        <div className="relative flex justify-center items-center">
             <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="max-w-full h-auto drop-shadow-xl font-sans">
 
                 {/* 1. Sector Backgrounds */}
