@@ -59,7 +59,7 @@ const FilterSidebar = ({ options, filters, onFilterChange, onClear }) => {
 
                 <div className="mb-6 border-b border-slate-200 pb-6">
                     <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-semibold text-slate-700">My Software Tier</h3>
+                        <h3 className="font-semibold text-slate-700">Your software's targets</h3>
                         <a
                             href="https://everse.software/RSQKit/three_tier_view"
                             target="_blank"
@@ -72,6 +72,11 @@ const FilterSidebar = ({ options, filters, onFilterChange, onClear }) => {
                     <div className="relative px-2 py-2">
                         <div className="relative flex flex-col gap-4 w-full">
                             {['ResearchInfrastructureSoftware', 'PrototypeTool', 'AnalysisCode'].map((cat, index, arr) => {
+                                const mapping = {
+                                    'AnalysisCode': 'individuals',
+                                    'PrototypeTool': 'research teams',
+                                    'ResearchInfrastructureSoftware': 'communities'
+                                };
                                 const isActive = filters.categories.includes(cat);
                                 const isLast = index === arr.length - 1;
                                 return (
@@ -101,9 +106,9 @@ const FilterSidebar = ({ options, filters, onFilterChange, onClear }) => {
 
                                         {/* Label */}
                                         <span
-                                            className={`ml-3 text-sm transition-colors ${isActive ? 'font-medium text-sky-700' : 'text-slate-500 group-hover:text-slate-700'}`}
+                                            className={`ml-3 text-sm transition-colors capitalize ${isActive ? 'font-medium text-sky-700' : 'text-slate-500 group-hover:text-slate-700'}`}
                                         >
-                                            {cat.replace(/([A-Z])/g, ' $1').trim()}
+                                            {mapping[cat] || cat}
                                         </span>
                                     </div>
                                 );
@@ -113,14 +118,14 @@ const FilterSidebar = ({ options, filters, onFilterChange, onClear }) => {
                 </div>
 
                 <FilterSection
-                    title="How to Use"
+                    title="How to Use the Tool"
                     options={options.usage}
                     selected={filters.usage}
                     onChange={(newVal) => onFilterChange('usage', newVal)}
                 />
 
                 <FilterSection
-                    title="Programming Language"
+                    title="Your Software's Programming Language"
                     options={options.languages || []}
                     selected={filters.languages || []}
                     onChange={(newVal) => onFilterChange('languages', newVal)}
@@ -139,7 +144,7 @@ const FilterSidebar = ({ options, filters, onFilterChange, onClear }) => {
                 </div>
 
                 <div className="mb-6 last:border-0">
-                    <h3 className="font-semibold text-slate-700 mb-3 text-sm">License</h3>
+                    <h3 className="font-semibold text-slate-700 mb-3 text-sm">License of the Tool</h3>
                     <select
                         className="w-full bg-white border border-slate-300 rounded-lg p-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500"
                         value={filters.licenses}

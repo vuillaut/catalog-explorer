@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { getAllTools, getQualityDimensions, getFilterOptions } from '../data/loader';
+import { getDimensionColor } from '../data/colors';
 import { Link } from 'react-router-dom';
 import { Search, Filter, Menu, X } from 'lucide-react';
 import FilterSidebar from '../components/FilterSidebar';
@@ -111,12 +112,6 @@ const Home = () => {
                         >
                             Browse Catalog
                         </button>
-                        <Link
-                            to="/dimensions"
-                            className="px-6 py-3 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-medium rounded-lg transition-colors"
-                        >
-                            View Dimensions
-                        </Link>
                     </div>
                 </div>
 
@@ -220,11 +215,23 @@ const Home = () => {
                                     {tool.hasQualityDimension && (
                                         (Array.isArray(tool.hasQualityDimension) ? tool.hasQualityDimension : [tool.hasQualityDimension])
                                             .slice(0, 3)
-                                            .map((dim, i) => (
-                                                <span key={i} className="text-xs px-2 py-1 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200">
-                                                    {dim['@id'].replace('dim:', '')}
-                                                </span>
-                                            ))
+                                            .map((dim, i) => {
+                                                const dimName = dim['@id'].replace('dim:', '');
+                                                const color = getDimensionColor(dimName, dimensions);
+                                                return (
+                                                    <span 
+                                                        key={i} 
+                                                        className="text-xs px-2 py-1 rounded-md border"
+                                                        style={{
+                                                            backgroundColor: `${color}10`, // 10% opacity
+                                                            borderColor: `${color}40`,     // 40% opacity
+                                                            color: color
+                                                        }}
+                                                    >
+                                                        {dimName}
+                                                    </span>
+                                                );
+                                            })
                                     )}
                                 </div>
                             </Link>
