@@ -108,7 +108,7 @@ const Home = () => {
                     <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-4">
                         <button
                             onClick={() => document.getElementById('browse-tools').scrollIntoView({ behavior: 'smooth' })}
-                            className="px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors shadow-lg shadow-sky-200"
+                            className="px-12 py-3 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors shadow-lg shadow-sky-200"
                         >
                             Browse Catalog
                         </button>
@@ -122,6 +122,10 @@ const Home = () => {
                             tools={tools}
                             dimensions={dimensions}
                             size={800}
+                            onDimClick={(dim) => {
+                                setSelectedDim(dim);
+                                document.getElementById('browse-tools')?.scrollIntoView({ behavior: 'smooth' });
+                            }}
                         />
                     </div>
                 </div>
